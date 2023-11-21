@@ -1,9 +1,11 @@
 export const selectionSort = async (
   arr: number[],
-  swap: (arr: number[], i: number, j: number) => void,
+  swap: (arr: number[], i: number, j: number, elemets: any) => void,
   speed: number
 ): Promise<void> => {
   const n = arr.length;
+
+  const arrayBars = document.getElementsByClassName("array-bar");
 
   for (let i = 0; i < n - 1; i++) {
     let minIndex = i;
@@ -15,7 +17,7 @@ export const selectionSort = async (
     }
 
     if (minIndex !== i) {
-      swap(arr, i, minIndex);
+      swap(arr, i, minIndex, arrayBars);
       await new Promise((resolve) => setTimeout(resolve, speed));
     }
   }

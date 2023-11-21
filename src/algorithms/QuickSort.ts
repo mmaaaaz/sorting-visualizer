@@ -1,8 +1,10 @@
 export const quickSort = async (
   arr: number[],
-  swap: (arr: number[], i: number, j: number) => void,
+  swap: (arr: number[], i: number, j: number, elemets: any) => void,
   speed: number
 ): Promise<void> => {
+  const arrayBars = document.getElementsByClassName("array-bar");
+
   const quickSortHelper = async (
     arr: number[],
     start: number,
@@ -26,12 +28,12 @@ export const quickSort = async (
     for (let j = start; j < end; j++) {
       if (arr[j] < pivot) {
         i++;
-        swap(arr, i, j);
+        swap(arr, i, j, arrayBars);
         await new Promise((resolve) => setTimeout(resolve, speed));
       }
     }
 
-    swap(arr, i + 1, end);
+    swap(arr, i + 1, end, arrayBars);
     return i + 1;
   };
 

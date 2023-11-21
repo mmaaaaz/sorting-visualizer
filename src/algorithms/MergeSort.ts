@@ -1,8 +1,10 @@
 export const mergeSort = async (
   arr: number[],
-  swap: (arr: number[], i: number, j: number) => void,
+  swap: (arr: number[], i: number, j: number, elemets: any) => void,
   speed: number
 ): Promise<void> => {
+  const arrayBars = document.getElementsByClassName("array-bar");
+
   const mergeSortHelper = async (arr: number[]): Promise<number[]> => {
     if (arr.length <= 1) return arr;
 
@@ -36,6 +38,6 @@ export const mergeSort = async (
   for (let i = 0; i < arr.length; i++) {
     arr[i] = sortedArray[i];
     await new Promise((resolve) => setTimeout(resolve, speed));
-    swap(arr, i, i);
+    swap(arr, i, i, arrayBars);
   }
 };

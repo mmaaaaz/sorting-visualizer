@@ -8,15 +8,14 @@ import {
   heapSort,
   selectionSort,
 } from "./algorithms";
+import { colors } from "./constants";
 
 const SortingVisualizer: React.FC = () => {
   const [array, setArray] = useState<number[]>([]);
   const [isSorting, setIsSorting] = useState<boolean>(false);
   const [speed, setSpeed] = useState<number>(0);
   const [arraySize, setArraySize] = useState<number>(50);
-  const [currentProcessIndex, setCurrentProcessIndex] = useState<number | null>(
-    null
-  );
+
   const algos = [
     "Bubble Sort",
     "Insertion Sort",
@@ -36,19 +35,26 @@ const SortingVisualizer: React.FC = () => {
       newArray.push(randomIntFromInterval(5, 500));
     }
     setArray(newArray);
-    setCurrentProcessIndex(null); // Reset the current process index
   };
 
   const randomIntFromInterval = (min: number, max: number): number => {
     return Math.floor(Math.random() * (max - min + 1) + min);
   };
 
-  const swap = (arr: number[], idx1: number, idx2: number) => {
+  const swap = (arr: number[], idx1: number, idx2: number, elements: any) => {
     const temp = arr[idx1];
     arr[idx1] = arr[idx2];
     arr[idx2] = temp;
-    setCurrentProcessIndex(idx1);
-    setCurrentProcessIndex(idx2);
+
+    // Update the elements colors besed on the current process index for speed time the revert to original color
+    elements[idx1].style.backgroundColor = colors.pivot;
+    elements[idx2].style.backgroundColor = colors.swap;
+
+    setTimeout(() => {
+      elements[idx1].style.backgroundColor = colors.default;
+      elements[idx2].style.backgroundColor = colors.default;
+    }, speed);
+
     setArray([...arr]);
   };
 
@@ -58,7 +64,6 @@ const SortingVisualizer: React.FC = () => {
 
       await handleSortFunction(algo);
       setIsSorting(false);
-      setCurrentProcessIndex(null);
     }
   };
 
@@ -134,10 +139,8 @@ const SortingVisualizer: React.FC = () => {
         {array.map((value, idx) => (
           <div
             key={idx}
-            className={`array-bar text-xs font-bold tracking-wider select-none flex items-center justify-center ${
-              currentProcessIndex === idx ? "bg-red-500" : "bg-blue-700"
-            }`}
-            style={{ height: `${value}px` }}
+            className={`array-bar text-xs font-bold text-white tracking-wider select-none flex items-center justify-center`}
+            style={{ height: `${value}px`, backgroundColor: colors.default }}
           >
             {value}
           </div>

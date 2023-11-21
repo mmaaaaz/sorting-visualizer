@@ -1,8 +1,10 @@
 export const heapSort = async (
   arr: number[],
-  swap: (arr: number[], i: number, j: number) => void,
+  swap: (arr: number[], i: number, j: number, elemets: any) => void,
   speed: number
 ): Promise<void> => {
+  const arrayBars = document.getElementsByClassName("array-bar");
+
   const heapify = async (
     arr: number[],
     n: number,
@@ -21,7 +23,7 @@ export const heapSort = async (
     }
 
     if (largest !== i) {
-      swap(arr, i, largest);
+      swap(arr, i, largest, arrayBars);
       await new Promise((resolve) => setTimeout(resolve, speed));
       await heapify(arr, n, largest);
     }
@@ -32,7 +34,7 @@ export const heapSort = async (
   }
 
   for (let i = arr.length - 1; i > 0; i--) {
-    swap(arr, 0, i);
+    swap(arr, 0, i, arrayBars);
     await new Promise((resolve) => setTimeout(resolve, speed));
     await heapify(arr, i, 0);
   }
