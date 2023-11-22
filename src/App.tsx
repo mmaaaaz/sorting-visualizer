@@ -126,7 +126,7 @@ const SortingVisualizer: React.FC = () => {
           <input
             type="range"
             disabled={isSorting}
-            min="50"
+            min="0"
             max="500"
             step="50"
             value={speed}
