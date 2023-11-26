@@ -87,7 +87,7 @@ const SortingVisualizer: React.FC = () => {
   };
 
   return (
-    <div className="sorting-visualizer flex flex-col justify-between">
+    <div className="sorting-visualizer bg-primary flex flex-col justify-between">
       <div className="controls gap-2 mt-9">
         {algos.map((algo) => (
           <button
@@ -139,8 +139,8 @@ const SortingVisualizer: React.FC = () => {
         {array.map((value, idx) => (
           <div
             key={idx}
-            className={`array-bar text-xs font-bold text-white tracking-wider select-none flex items-center justify-center`}
-            style={{ height: `${value}px`, backgroundColor: colors.default }}
+            className={`array-bar text-xs font-bold text-red-600 bg-secondary tracking-wider select-none flex items-center justify-center`}
+            style={{ height: `${value}px` }}
           >
             {value}
           </div>
